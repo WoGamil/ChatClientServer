@@ -18,8 +18,8 @@ public class ThreadGestioneServizoChat implements Runnable {
   public ThreadGestioneServizoChat(int numeroMaxConnessioni, List lista) {
     this.nrMaxConnessioni = nrMaxConnessioni - 1;
     this.lista = lista;
-    this.listaConnessioni = new ThreadChatConnessioni[this.nrMaxConnessioni];
-    me = new Thread[this];
+    this.listaConnessioni = new ThreadChatConnesioni[this.nrMaxConnessioni];
+    me = new Thread(this);
     me.start();
   }
 

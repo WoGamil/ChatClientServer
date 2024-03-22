@@ -10,6 +10,11 @@ public class ThreadChatClient  implements Runnable {
     private BufferedReader input = null;
     private PrintWriter output = null;
 
+    /**
+     * @param lista
+     * @param ipServer
+     * @param porta
+     */
     private  ThreadChatClient (List lista, String ipServer, int porta) {
         this.lista = lista;
         try {
@@ -21,5 +26,30 @@ public class ThreadChatClient  implements Runnable {
         }
         me = new Thread();
         me.start();
+    }
+
+    public void run() {
+        //aspetto le recezioni di messaggi e aggiungo i messaggi alla lista
+        try {
+            String mex = null;
+            while ((mex = input.readLine()) == null) {
+                //Empty
+            }
+            lista.add(mex);
+            lista.select(lista.getItemCount()-1);
+        } catch (Exception e) {
+            //Empty
+        }
+    }
+
+    /**
+     * @param messaggio
+     */
+    public void spedisciMessaggioChat(String messaggio) {
+        try {
+            output.println(messaggio);
+        } catch (Exception e) {
+            // Empty
+        }
     }
 }
