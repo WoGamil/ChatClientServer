@@ -36,7 +36,7 @@ public class ThreadChatClient implements Runnable {
         // Attende le ricezioni di messaggi dal server e aggiunge i messaggi alla lista
         try {
             String mex = null;
-            while ((mex = input.readLine()) != null) {
+            while ((mex = input.readLine()) == null) {
                 // Aggiunge il messaggio ricevuto alla lista dei messaggi
                 lista.add(mex);
                 lista.select(lista.getItemCount()-1);

@@ -3,6 +3,8 @@ import java.awt.event.*; // Importa le classi per la gestione degli eventi
 import javax.swing.*; // Importa le classi per la creazione di finestre grafiche
 
 public class PannelloChatServer extends JPanel implements ActionListener {
+
+    private List lista;
     private ThreadGestioneServizoChat gestioneServizio; // Gestore del servizio di chat
     private JTextField textNuovo; // Campo di testo per l'inserimento di nuovi messaggi
 
@@ -61,7 +63,7 @@ public class PannelloChatServer extends JPanel implements ActionListener {
      */
     public void connetti() {
         // Istanzia il gestore del servizio di chat con un massimo di 10 connessioni
-        gestioneServizio = new ThreadGestioneServizoChat(10, null);
+        gestioneServizio = new ThreadGestioneServizoChat(10, lista);
     }
 
     /**

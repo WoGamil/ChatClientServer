@@ -2,10 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PannelloChatClient extends JFrame implements ActionListener {
+public class PannelloChatClient extends JPanel implements ActionListener {
+
     private ThreadChatClient gestioneServizio;
     private JTextField textNuovo;
-    //private JTextField textNome; // Campo di testo per inserire il nome del client
     private List lista;
     private String ipServer = "localhost";
     private int porta = 6789;
@@ -19,7 +19,7 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         
         // Pannello superiore: lista messaggi
         JPanel panLista = new JPanel(new BorderLayout(20, 5));
-        panLista.setBackground(new Color(50, 100, 255));
+        panLista.setBackground(new Color(255, 204, 51));
         List lista = new List();
         lista.setBackground(Color.lightGray);
         lista.setSize(100, 50);
@@ -32,17 +32,16 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         chat2.setForeground(new Color(200, 100, 100));
         
         // Aggiunge gli oggetti al pannello
-        panLista.add(chat1, BorderLayout.CENTER);
+        panLista.add(chat1, BorderLayout.WEST);
         panLista.add(lista, BorderLayout.CENTER);
-        panLista.add(chat2, BorderLayout.CENTER);
+        panLista.add(chat2, BorderLayout.EAST);
         
         // Pannello inserimento nuovo messaggio
         JPanel nuovoMex = new JPanel(new BorderLayout(20, 5));
         nuovoMex.setBackground(new Color(50, 100, 255));
 
-        /*JLabel labNome = new JLabel("Nome:"); // Etichetta per il campo del nome
-        textNome = new JTextField(""); // Campo di testo per il nome del client
-        JLabel labNuovo = new JLabel("Messaggio:"); // Etichetta per il campo del messaggio*/
+        JLabel labNuovo = new JLabel("Nuovo Messaggio -> ",JLabel.CENTER);
+	    labNuovo.setForeground(new Color(255,255,0));
 
         textNuovo = new JTextField("");
         
@@ -50,9 +49,7 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         buttonInvia.addActionListener(this);
         
         // Aggiunge gli oggetti al pannello
-        //nuovoMex.add(labNome, BorderLayout.WEST);
-        //nuovoMex.add(textNome, BorderLayout.CENTER);
-        //nuovoMex.add(labNuovo, BorderLayout.WEST);
+        nuovoMex.add(labNuovo,BorderLayout.WEST);
         nuovoMex.add(textNuovo, BorderLayout.CENTER);
         nuovoMex.add(buttonInvia, BorderLayout.EAST);
 
@@ -60,20 +57,22 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         add(panLista, BorderLayout.CENTER);
         add(nuovoMex, BorderLayout.SOUTH);
 
-        connetti();
+        connettiAlServer();
     }
 
     /**
      * Metodo per connettersi al servizio di chat
      */
-    public void connetti() {
+    public void connettiAlServer() {
         gestioneServizio = new ThreadChatClient(lista, ipServer, porta);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        String bottone = e.getActionCommand(); // Ottiene il comando dell'azione
+        if(bottone.equals("Invia")) { // Se l'azione è "Invia"
+            gestioneServizio.spedisciMessaggioChat(textNuovo.getText()); // Invia il messaggio al server
+            textNuovo.setText(""); // Cancella il testo nel campo di testo
+        }
     }
-
 }
