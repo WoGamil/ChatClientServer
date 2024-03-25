@@ -3,9 +3,12 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class PannelloChatClient extends JFrame implements ActionListener {
-    private ThreadGestioneServizoChat gestioneServizio;
+    private ThreadChatClient gestioneServizio;
     private JTextField textNuovo;
-    private JTextField textNome; // Campo di testo per inserire il nome del client
+    //private JTextField textNome; // Campo di testo per inserire il nome del client
+    private List lista;
+    private String ipServer = "localhost";
+    private int porta = 6789;
 
     /**
      * Costruttore della classe PannelloChatClient
@@ -37,9 +40,9 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         JPanel nuovoMex = new JPanel(new BorderLayout(20, 5));
         nuovoMex.setBackground(new Color(50, 100, 255));
 
-        JLabel labNome = new JLabel("Nome:"); // Etichetta per il campo del nome
+        /*JLabel labNome = new JLabel("Nome:"); // Etichetta per il campo del nome
         textNome = new JTextField(""); // Campo di testo per il nome del client
-        JLabel labNuovo = new JLabel("Messaggio:"); // Etichetta per il campo del messaggio
+        JLabel labNuovo = new JLabel("Messaggio:"); // Etichetta per il campo del messaggio*/
 
         textNuovo = new JTextField("");
         
@@ -47,9 +50,9 @@ public class PannelloChatClient extends JFrame implements ActionListener {
         buttonInvia.addActionListener(this);
         
         // Aggiunge gli oggetti al pannello
-        nuovoMex.add(labNome, BorderLayout.WEST);
-        nuovoMex.add(textNome, BorderLayout.CENTER);
-        nuovoMex.add(labNuovo, BorderLayout.WEST);
+        //nuovoMex.add(labNome, BorderLayout.WEST);
+        //nuovoMex.add(textNome, BorderLayout.CENTER);
+        //nuovoMex.add(labNuovo, BorderLayout.WEST);
         nuovoMex.add(textNuovo, BorderLayout.CENTER);
         nuovoMex.add(buttonInvia, BorderLayout.EAST);
 
@@ -64,21 +67,13 @@ public class PannelloChatClient extends JFrame implements ActionListener {
      * Metodo per connettersi al servizio di chat
      */
     public void connetti() {
-        gestioneServizio = new ThreadGestioneServizoChat(10, null);
+        gestioneServizio = new ThreadChatClient(lista, ipServer, porta);
     }
 
-    /**
-     * Metodo per gestire gli eventi generati dall'interfaccia grafica
-     * @param e L'evento generato
-     */
+    @Override
     public void actionPerformed(ActionEvent e) {
-        String bottone = e.getActionCommand();
-        if(bottone.equals("Invia")) {
-            // Invia il messaggio includendo il nome del client
-            String nome = textNome.getText();
-            String messaggio = "[" + nome + "]: " + textNuovo.getText();
-            gestioneServizio.spedisciMessaggio(messaggio);
-            textNuovo.setText("");
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+
 }

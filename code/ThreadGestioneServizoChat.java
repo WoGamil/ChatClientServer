@@ -5,7 +5,7 @@ import javax.swing.JOptionPane; // Importa la classe JOptionPane per mostrare fi
 
 public class ThreadGestioneServizoChat implements Runnable {
   
-  private int nrMaxConnessioni; // Numero massimo di connessioni consentite
+  private int nrMaxConnessioni=10; // Numero massimo di connessioni consentite
   private List lista; // Lista per memorizzare i messaggi della chat
   private ThreadChatConnesioni[] listaConnessioni; // Array di thread per gestire le connessioni
   Thread me; // Thread corrente

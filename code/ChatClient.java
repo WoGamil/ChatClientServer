@@ -2,7 +2,7 @@ import java.awt.*; // Importa le classi per la gestione delle interfacce grafich
 import javax.swing.*; // Importa le classi per la creazione di finestre grafiche
 
 public class ChatClient extends JFrame {
-
+    private String nome;
     /**
      * Costruttore della classe ChatClient
      */

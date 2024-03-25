@@ -2,16 +2,17 @@ import java.awt.*; // Importa le classi per la gestione delle interfacce grafich
 import java.awt.event.*; // Importa le classi per la gestione degli eventi
 import javax.swing.*; // Importa le classi per la creazione di finestre grafiche
 
-public class PannelloChatServer extends JFrame implements ActionListener {
+public class PannelloChatServer extends JPanel implements ActionListener {
     private ThreadGestioneServizoChat gestioneServizio; // Gestore del servizio di chat
     private JTextField textNuovo; // Campo di testo per l'inserimento di nuovi messaggi
 
     /**
      * Costruttore della classe PannelloChatServer
      */
-    public PannelloChatServer() {
+    public PannelloChatServer(){
         super();
         this.setBackground(new Color(50, 100, 255)); // Imposta il colore di sfondo della finestra
+
         // Pannello superiore: lista messaggi
         JPanel panLista = new JPanel(new BorderLayout(20, 5));
         panLista.setBackground(new Color(50, 100, 255)); // Imposta il colore di sfondo del pannello
@@ -19,15 +20,18 @@ public class PannelloChatServer extends JFrame implements ActionListener {
         lista.setBackground(Color.lightGray); // Imposta il colore di sfondo della lista
         lista.setSize(100, 50);
         lista.setVisible(true);
+
         // Etichette laterali
         JLabel chat1 = new JLabel("  Chat  ", JLabel.CENTER);
         chat1.setForeground(new Color(200, 100, 100)); // Imposta il colore del testo dell'etichetta
         JLabel chat2 = new JLabel("  Chat  ", JLabel.CENTER);
         chat2.setForeground(new Color(200, 100, 100)); // Imposta il colore del testo dell'etichetta
+
         // Aggiunge gli oggetti al pannello
-        panLista.add(chat1, BorderLayout.CENTER);
+        panLista.add(chat1, BorderLayout.WEST);
         panLista.add(lista, BorderLayout.CENTER);
-        panLista.add(chat2, BorderLayout.CENTER);
+        panLista.add(chat2, BorderLayout.EAST);
+
         // Pannello inserimento nuovo messaggio
         JPanel nuovoMex = new JPanel(new BorderLayout(20, 5));
         nuovoMex.setBackground(new Color(50, 100, 255)); // Imposta il colore di sfondo del pannello
@@ -39,6 +43,7 @@ public class PannelloChatServer extends JFrame implements ActionListener {
 
         JButton buttonInvia = new JButton("Invia"); // Bottone per inviare il messaggio
         buttonInvia.addActionListener(this); // Aggiunge il listener per gestire gli eventi del bottone
+
         // Aggiunge gli oggetti al pannello
         nuovoMex.add(labNuovo, BorderLayout.WEST);
         nuovoMex.add(textNuovo, BorderLayout.CENTER);
